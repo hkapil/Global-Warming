@@ -15,8 +15,8 @@ Population Data: https://www.kaggle.com/lodgeh/us-population-growth/data
 Industrialization Emissions: https://www.eia.gov/opendata/qb.php?category=2251669
 
 # Solution Architecture
-![solution_arch](Images/Solution_Arc.jpeg)
+![solution_arch](Images/Solution_Arc.jpg)
 
 
 # Visualization
-![Visualization](Images/Visualization.jpeg)
+![Visualization](Images/Visualization.jpg)
