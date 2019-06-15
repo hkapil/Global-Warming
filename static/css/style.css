@@ -1,3 +1,12 @@
+html,
+body,
+#map-id {
+  height: 80%;
+  width: 80%;
+  padding: 0;
+  margin: 0;
+}
+
 #hairmetal {
   border-radius: 8px;
 }
@@ -57,4 +66,9 @@
 .inactive:hover {
   fill: #e75480;
   cursor: pointer;
+}
+
+#divmap {
+  height: 400px;
+  width: 500px;
 }

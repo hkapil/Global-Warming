@@ -2,6 +2,8 @@ import os
 
 import pandas as pd
 import numpy as np
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -18,7 +20,8 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/bellybutton.sqlite"
+#app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/global_warming.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data/climate_change.sqlite"
 db = SQLAlchemy(app)
 
 # reflect an existing database into a new model
@@ -27,62 +30,124 @@ Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
 # Save references to each table
-Samples_Metadata = Base.classes.sample_metadata
-Samples = Base.classes.samples
-
+#Population_Metadata = Base.classes.population_metadata
+#States = Base.classes.states
+#Pollution = Base.classes.co2_emissions
+#Population = Base.classes.population
+States = Base.classes.US_States
+Pollution = Base.classes.co2
+Population = Base.classes.census_data
+Temperature = Base.classes.us_temp
 
 @app.route("/")
 def index():
     """Return the homepage."""
     return render_template("index.html")
 
-
-@app.route("/names")
-def names():
-    """Return a list of sample names."""
-
+@app.route("/states")
+def states():
+    """Return a list of states."""
     # Use Pandas to perform the sql query
-    stmt = db.session.query(Samples).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
+    stmt = db.session.query(States).statement
+    #df = pd.read_sql('select * from states', db.session.bind)
+    df = pd.read_sql(stmt, db.session.bind)
+    #return jsonify(list(df["state_name"]))
+    return jsonify(list(df["name"]))
 
-    # Return a list of the column names (sample names)
-    return jsonify(list(df.columns)[2:])
+@app.route("/pollution/<sample>")
+def pollution(sample):
+    """Return `otu_ids`, `otu_labels`,and `sample_values`."""
+    #stmt1 = db.session.query(Pollution).statement
+    print("test statement")
+    #df1 = pd.read_sql('select year, co2, State from co2_emissions', db.session.bind)
+    #print(stmt1)
+    df1 = pd.read_sql('select Year, CO2DATA, State from co2', db.session.bind)
+    #print(stmt1)
+    print("test statement2")
+    #df1 = pd.read_sql(stmt1, db.session.bind)
+    print(df1)
+    print("test statement3")
+    sample_data1 = df1.loc[1:3]
+    print(sample_data1)
+    print("test statement4")
+    # Filter the data based on the sample number and
+    # only keep rows with values above 1
+ #   sample_data = df.loc[df[sample] > 1, ["Year", "co2", sample]]
+ #   sample_data = sample_data.sort_values(sample, ascending=False)
+    print(sample_data1)
+    print("test statement5")
+    # Format the data to send as json
+    data1 = {
+        "Year": sample_data1.Year.values.tolist(),
+        "sample_values": sample_data1.State.values.tolist(),
+        "co2": sample_data1.CO2DATA.tolist(),
+        "avgTemp": sample_data1.CO2DATA.tolist(),
+    }
+    #print(data)
+    return jsonify(data1)
 
+@app.route("/population/<sample>")
+def population(sample):
+    """Return `otu_ids`, `otu_labels`,and `sample_values`."""
+    #stmt1 = db.session.query(Pollution).statement
+    print("test statement")
+    df1 = pd.read_sql('select year, co2, State from co2_emissions', db.session.bind)
+    #print(stmt1)
+    print("test statement2")
+    #df1 = pd.read_sql(stmt1, db.session.bind)
+    print(df1)
+    print("test statement3")
+    sample_data1 = df1.loc[1:3]
+    print(sample_data1)
+    print("test statement4")
+    # Filter the data based on the sample number and
+    # only keep rows with values above 1
+ #   sample_data = df.loc[df[sample] > 1, ["Year", "co2", sample]]
+ #   sample_data = sample_data.sort_values(sample, ascending=False)
+    print(sample_data1)
+    print("test statement5")
+    # Format the data to send as json
+    data1 = {
+        "Year": sample_data1.Year.values.tolist(),
+        "sample_values": sample_data1.State.values.tolist(),
+        "co2": sample_data1.co2.tolist(),
+        "population": sample_data1.co2.tolist(),
+    }
+    #print(data)
+    return jsonify(data1)
 
-@app.route("/metadata/<sample>")
-def sample_metadata(sample):
-    """Return the MetaData for a given sample."""
+@app.route("/metadata/<state>")
+def population_metadata(state):
+#    """Return the MetaData for a given sample."""
     sel = [
-        Samples_Metadata.sample,
-        Samples_Metadata.ETHNICITY,
-        Samples_Metadata.GENDER,
-        Samples_Metadata.AGE,
-        Samples_Metadata.LOCATION,
-        Samples_Metadata.BBTYPE,
-        Samples_Metadata.WFREQ,
+        Population.ID,
+        Population.State,
+        Population.Year,
+        Population.Population,
     ]
 
-    results = db.session.query(*sel).filter(Samples_Metadata.sample == sample).all()
+    results = db.session.query(*sel).filter(Population.State == state).all()
 
     # Create a dictionary entry for each row of metadata information
-    sample_metadata = {}
+    population = {}
     for result in results:
-        sample_metadata["sample"] = result[0]
-        sample_metadata["ETHNICITY"] = result[1]
-        sample_metadata["GENDER"] = result[2]
-        sample_metadata["AGE"] = result[3]
-        sample_metadata["LOCATION"] = result[4]
-        sample_metadata["BBTYPE"] = result[5]
-        sample_metadata["WFREQ"] = result[6]
+        population["ID"] = result[0]
+        population["State"] = result[1]
+        population["Year"] = result[2]
+        population["Population"] = result[3]
 
-    print(sample_metadata)
-    return jsonify(sample_metadata)
+    print("test statement6")
+
+    print(population)
+    print("test statement7")
+
+    return jsonify(population)
 
 
 @app.route("/samples/<sample>")
 def samples(sample):
     """Return `otu_ids`, `otu_labels`,and `sample_values`."""
-    stmt = db.session.query(Samples).statement
+    stmt = db.session.query(Population).statement
     df = pd.read_sql_query(stmt, db.session.bind)
 
     # Filter the data based on the sample number and
