@@ -1,6 +1,6 @@
-function buildPolPopChart(sample) {
+function buildPolPopChart(state, fromDate, toDate) {
 // @TODO: Use `d3.json` to fetch the sample data for the plots
-var defaultURL = "/population/" + sample;
+var defaultURL = "/pol-pop/" + state + "/" + fromDate + "/" + toDate;
 d3.json(defaultURL).then(function(data) {
 
 var data = [
@@ -17,7 +17,7 @@ var data = [
   {
     type: 'bar',
     x: data.year,
-    y: data.avgTemp,
+    y: data.population/1000000,
     base: 0,
     marker: {
       color: 'blue'
