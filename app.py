@@ -65,17 +65,17 @@ def pollution(sample):
     #print(stmt1)
     print("test statement2")
     #df1 = pd.read_sql(stmt1, db.session.bind)
-    print(df1)
-    print("test statement3")
+    #print(df1)
+    #print("test statement3")
     sample_data1 = df1.loc[1:3]
-    print(sample_data1)
-    print("test statement4")
+    #print(sample_data1)
+    #print("test statement4")
     # Filter the data based on the sample number and
     # only keep rows with values above 1
  #   sample_data = df.loc[df[sample] > 1, ["Year", "co2", sample]]
  #   sample_data = sample_data.sort_values(sample, ascending=False)
-    print(sample_data1)
-    print("test statement5")
+    #print(sample_data1)
+    #print("test statement5")
     # Format the data to send as json
     data1 = {
         "Year": sample_data1.Year.values.tolist(),
@@ -90,31 +90,94 @@ def pollution(sample):
 def population(sample):
     """Return `otu_ids`, `otu_labels`,and `sample_values`."""
     #stmt1 = db.session.query(Pollution).statement
-    print("test statement")
-    df1 = pd.read_sql('select year, co2, State from co2_emissions', db.session.bind)
+    #print("test statement")
+    df1 = pd.read_sql('select State, Year, Population from census_data', db.session.bind)
     #print(stmt1)
-    print("test statement2")
+    #print("test statement2")
     #df1 = pd.read_sql(stmt1, db.session.bind)
-    print(df1)
-    print("test statement3")
-    sample_data1 = df1.loc[1:3]
-    print(sample_data1)
-    print("test statement4")
+    #print(df1)
+    #print("test statement3")
+    pop_data = df1.loc[1:3]
+    #print(pop_data)
+    #print("test statement4")
     # Filter the data based on the sample number and
     # only keep rows with values above 1
  #   sample_data = df.loc[df[sample] > 1, ["Year", "co2", sample]]
  #   sample_data = sample_data.sort_values(sample, ascending=False)
-    print(sample_data1)
-    print("test statement5")
+    #print(pop_data)
+    #print("test statement5")
     # Format the data to send as json
     data1 = {
-        "Year": sample_data1.Year.values.tolist(),
-        "sample_values": sample_data1.State.values.tolist(),
-        "co2": sample_data1.co2.tolist(),
-        "population": sample_data1.co2.tolist(),
+        "year": pop_data.Year.values.tolist(),
+        "state": pop_data.State.values.tolist(),
+        "co2": pop_data.Population.tolist(),
+        "population": pop_data.Population.tolist(),
     }
     #print(data)
     return jsonify(data1)
+
+@app.route("/3factor/<sample>")
+def threeFactor(sample):
+    """Return `otu_ids`, `otu_labels`,and `sample_values`."""
+    #stmt1 = db.session.query(Pollution).statement
+    #print("test statement")
+    df1 = pd.read_sql('select State, Year, Population from census_data', db.session.bind)
+    #print(stmt1)
+    #print("test statement2")
+    #df1 = pd.read_sql(stmt1, db.session.bind)
+    #print(df1)
+    #print("test statement3")
+    three_data = df1.loc[1:3]
+    #print(three_data)
+    #print("test statement4")
+    # Filter the data based on the sample number and
+    # only keep rows with values above 1
+ #   sample_data = df.loc[df[sample] > 1, ["Year", "co2", sample]]
+ #   sample_data = sample_data.sort_values(sample, ascending=False)
+    #print(pop_data)
+    #print("test statement5")
+    # Format the data to send as json
+    data1 = {
+        "Year": three_data.Year.values.tolist(),
+        "state": three_data.State.values.tolist(),
+        "co2": three_data.Population.tolist(),
+        "population": three_data.Population.tolist(),
+        "temp": three_data.Population.tolist(),
+    }
+    #print(data)
+    return jsonify(data1)
+
+
+@app.route("/pop-temp/<sample>")
+def popTemp(sample):
+    """Return `otu_ids`, `otu_labels`,and `sample_values`."""
+    #stmt1 = db.session.query(Pollution).statement
+    #print("test statement")
+    df1 = pd.read_sql('select State, Year, Population from census_data', db.session.bind)
+    #print(stmt1)
+    #print("test statement2")
+    #df1 = pd.read_sql(stmt1, db.session.bind)
+    #print(df1)
+    #print("test statement3")
+    three_data1 = df1.loc[1:3]
+    #print(three_data)
+    #print("test statement4")
+    # Filter the data based on the sample number and
+    # only keep rows with values above 1
+ #   sample_data = df.loc[df[sample] > 1, ["Year", "co2", sample]]
+ #   sample_data = sample_data.sort_values(sample, ascending=False)
+    #print(pop_data)
+    #print("test statement5")
+    # Format the data to send as json
+    data1 = {
+        "year": three_data1.Year.values.tolist(),
+        "state": three_data1.State.values.tolist(),
+        "population": three_data1.Population.tolist(),
+        "avgTemp": three_data1.Population.tolist(),
+    }
+    #print(data)
+    return jsonify(data1)
+
 
 @app.route("/metadata/<state>")
 def population_metadata(state):

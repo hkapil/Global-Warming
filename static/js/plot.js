@@ -52,20 +52,24 @@ function init() {
     // Use the first sample from the list to build the initial plots
     // const firstSample = sample.State[0];
     const firstSample = "MD";
-    buildRocAirChart(firstSample);
+    //buildRocAirChart(firstSample);
     buildPolTempChart(firstSample);
     buildPolPopChart(firstSample);
-    buildRocAirChart(firstSample);
+    buildPopTempChart(firstSample);
+      //buildRocAirChart(firstSample);
+    build3FactorChart(firstSample);
     buildMetadata(firstSample);
   });
 }
 
 function optionChanged(newSample) {
   // Fetch new data each time a new sample is selected
-  buildRocAirChart(newSample);
+  //buildRocAirChart(newSample);
   buildPolTempChart(newSample);
+  buildPopTempChart(newSample);
   buildPolPopChart(newSample);
-  buildRocAirChart(newSample);
+  //buildRocAirChart(newSample);
+  build3FactorChart(newSample);
   buildMetadata(newSample);
 }
 
