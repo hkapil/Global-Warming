@@ -12,7 +12,8 @@
   <!-- Our CSS -->
   <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 
-
+  <link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">  
+  <script src='https://vjs.zencdn.net/7.5.5/video.js'></script>
   <!-- Icons -->
   <!-- <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="css/leaflet.extra-markers.min.css"> -->
@@ -25,66 +26,80 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-12 jumbotron text-center">
-        <h1>Climate Change - Trends and Factors</h1>
-        <h1>USA</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
+      <div class="col-md-12 jumbotron text-center" id=jumbotext>
+        <h2>Climate Change - Trends and Factors (USA)</h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <div class="well">
-          <h5>SELECT State:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
-        </div>
-      </div>
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
           <div class="well">
           <h5>SELECT From:</h5>
           <select id="selDataset1" onchange="optionChanged(this.value)"></select>
         </div>
-      </div>
-      <div class="col-md-4">
+      </div> -->
+      <!-- <div class="col-md-4">
           <div class="well">
           <h5>SELECT To:</h5>
           <select id="selDataset2" onchange="optionChanged(this.value)"></select>
         </div>
-      </div>
-    </div>
-      <div class="row">
-          <div class="panel panel-primary">
+      </div> -->
+    <!-- </div> -->
+    <div class="col-md-6">
+        <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Sample MetaData</h3>
+            <h3 class="panel-title">Select data to view:</h3>
           </div>
-          <div id="sample-metadata" class="panel-body"></div>
+          <div class="col-md-4">
+              <div class="well">
+                <h5>State:</h5>
+                <select id="selDataset" onchange="optionChanged(this.value)"></select>
+                <h5>From Year:</h5>
+                <select id="selDataset1" onchange="optionChanged(this.value)"></select>
+                <h5>To Year:</h5>
+                <select id="selDataset2" onchange="optionChanged(this.value)"></select>
+              </div>
+            </div>
+                <div id="sample-metadata" class="panel-body"></div>
         </div>
       </div>
-    <!-- The div that holds our map -->
+      <div class="col-md-6">
+          <video id="vid1" class="video-js vjs-default-skin"    
+      controls    
+      autoplay    
+      width="640" height="264"    
+      data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=mlgpS_7FRzA"}] }'  
+      >  
+      </video>  
+    </div>
+      
+    </div>
+    <div class="row">
+          <!-- The div that holds our map -->
     <div class="col-md-6">
       <div id="divmap"></div>
       </div>
-    <div class="col-md-6">
-        <div id="three_factor"></div>
+      <div class="col-md-6">
+            <div id="three_factor"></div>
+          </div>
+        </div>
       </div>
-    </div>
-  <div class="row">
-    <div class="col-md-12">
+      <div class="row">
+    <div class="col-md-4">
+      <h4>Polution vs Temperature</h4>
       <div id="pol_temp"></div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div id="pop_temp"></div>
+    <div class="col-md-4">
+        <h4>Population vs Temperature</h4>
+        <div id="pop_temp"></div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div id="pol_pop"></div>
+    <div class="col-md-4">
+        <h4>Polution vs Population</h4>
+        <div id="pol_pop"></div>
     </div> 
   </div>
 </div>
 </div>
-  
+<script src="../static/dist/Youtube.js"></script>  
 <!-- D3 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
 

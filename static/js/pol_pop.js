@@ -3,17 +3,19 @@ function buildPolPopChart(state, fromDate, toDate) {
 var defaultURL = "/pol-pop/" + state + "/" + fromDate + "/" + toDate;
 d3.json(defaultURL).then(function(data) {
 
-var data = [
+var data1 = [
   {
     type: 'bar',
     x: data.year,
     y: data.co2,
-    base: [-500,-600,-700],
+    
     marker: {
       color: 'red'
     },
     name: 'Pollution'
-  },
+  }]
+
+  var data2 = [
   {
     type: 'bar',
     x: data.year,
@@ -25,5 +27,13 @@ var data = [
     name: 'Population'
   }]
 
-Plotly.newPlot("pol_pop", data);
+  var trace = [data1, data2];
+
+  var layout = {        
+    xaxis: {            
+      nticks: data.year.length
+    }      
+  }
+
+Plotly.newPlot("pol_pop", trace, layout);
 })};

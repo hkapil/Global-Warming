@@ -36,11 +36,9 @@ function buildPolTempChart(state, fromDate, toDate) {
              
              var layout1 = { margin: { t: 30, b: 100 } };
              
-             
+             Plotly.plot('pol_temp', data1, layout1);
              
              Plotly.plot('pol_temp', data2, layout2);
-             
-             Plotly.plot('pol_temp', data1, layout1);
              
              });
              
