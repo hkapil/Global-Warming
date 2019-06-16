@@ -1,7 +1,7 @@
-function build3FactorChart(sample) {
+function build3FactorChart(state, fromDate, toDate) {
 
     // @TODO: Use `d3.json` to fetch the sample data for the plots
-    var defaultURL = "/3factor/" + sample;
+    var defaultURL = "/3factor/" + state + "/" + fromDate + "/" + toDate;
     d3.json(defaultURL).then(function(data) {
     
     //Create traces
@@ -13,7 +13,7 @@ function build3FactorChart(sample) {
     };
     trace1 = {
         x : data.year,
-        y : data.population,
+        y : data.population/1000000,
         mode : 'lines+markers',
         name : 'lines+markers'
     };

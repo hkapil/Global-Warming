@@ -1,10 +1,10 @@
-function buildPopTempChart(sample) {
+function buildPopTempChart(state, fromDate, toDate) {
 
 
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
 
-  var defaultURL = "/pop-temp/" + sample;
+  var defaultURL = "/pop-temp/" + state + "/" + fromDate + "/" + toDate;
 
   d3.json(defaultURL).then(function(data) {
 
@@ -38,7 +38,7 @@ var trace2 = {
 
   x: data.year,
 
-  y: data.population,
+  y: data.population/1000000,
 
   text: ['A</br>size: 40</br>sixeref: 0.2', 'B</br>size: 60</br>sixeref: 0.2', 'C</br>size: 80</br>sixeref: 0.2', 'D</br>size: 100</br>sixeref: 0.2'],
 

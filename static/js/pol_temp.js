@@ -1,10 +1,10 @@
-function buildPolTempChart(sample) {
+function buildPolTempChart(state, fromDate, toDate) {
 
 
 
                 // @TODO: Use `d3.json` to fetch the sample data for the plots
              
-                var defaultURL = "/pollution/" + sample;
+                var defaultURL = "/pol-temp/" + state + "/" + fromDate + "/" + toDate;
              
                 d3.json(defaultURL).then(function(data) {
              
