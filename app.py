@@ -81,7 +81,7 @@ def population(state,fromDate, toDate):
     stmt1 = "select b.Abbr, b.Year, b.CO2DATA, a.Population from census_data a, co2 b where a.State = b.Abbr and a.Year = b.year and b.Abbr = " + "'" + state + "'" + " and b.year >= " + "'" + fromDate + "'" + " and b.year <= " + "'" + toDate +"'"
     df1 = pd.read_sql(stmt1, db.session.bind)
 #    df1 = pd.read_sql('select b.Abbr, b.Year, b.CO2DATA, a.Population from census_data a, co2 b where a.State = b.Abbr and a.Year = b.year', db.session.bind)
-    pol_pop = df1.loc[1:3]
+    pol_pop = df1
     pol_pop1 = {
         "year": pol_pop.Year.values.tolist(),
         "state": pol_pop.Abbr.values.tolist(),
@@ -96,7 +96,7 @@ def threeFactor(state,fromDate, toDate):
     stmt1 = "select a.State, a.Population, b.year, b.avg_temp, c.CO2DATA from census_data a, view_us_temp_year b, co2 c where b.state_id = a.State and  b.state_id = c.Abbr and a.Year = b.year and a.Year = c.year and b.state_id = " + "'" + state + "'" + " and b.year >= " + "'" + fromDate + "'" + " and b.year <= " + "'" + toDate +"'"
     df1 = pd.read_sql(stmt1, db.session.bind)
 #    df1 = pd.read_sql('select a.State, a.Population, b.year, b.avg_temp, c.CO2DATA from census_data a, view_us_temp_year b, co2 c where b.state_id = a.State and  b.state_id = c.Abbr and a.Year = b.year and a.Year = c.year', db.session.bind)
-    three_data = df1.loc[1:3]
+    three_data = df1
     data1 = {
         "Year": three_data.year.values.tolist(),
         "state": three_data.State.values.tolist(),
@@ -113,7 +113,8 @@ def popTemp(state,fromDate, toDate):
     stmt1 = "select a.State, a.Population, b.year, b.avg_temp from census_data a, view_us_temp_year b where b.state_id = a.State and a.Year = b.year and b.state_id = " + "'" + state + "'" + " and b.year >= " + "'" + fromDate + "'" + " and b.year <= " + "'" + toDate +"'"
     df1 = pd.read_sql(stmt1, db.session.bind)
     #df1 = pd.read_sql('select a.State, a.Population, b.year, b.avg_temp from census_data a, view_us_temp_year b where b.state_id = a.State and a.Year = b.year', db.session.bind)
-    three_data1 = df1.loc[1:3]
+    #three_data1 = df1.loc[1:3]
+    three_data1 = df1
     data1 = {
         "year": three_data1.year.values.tolist(),
         "state": three_data1.State.values.tolist(),
