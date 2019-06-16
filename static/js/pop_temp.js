@@ -24,7 +24,7 @@ var trace1 = {
 
   marker: {
 
-    size: [400, 600, 800, 1000],
+    size: data.avgTemp,
 
     sizemode: 'area'
 
@@ -38,7 +38,7 @@ var trace2 = {
 
   x: data.year,
 
-  y: data.population/1000000,
+  y: data.population/800000,
 
   text: ['A</br>size: 40</br>sixeref: 0.2', 'B</br>size: 60</br>sixeref: 0.2', 'C</br>size: 80</br>sixeref: 0.2', 'D</br>size: 100</br>sixeref: 0.2'],
 
@@ -46,7 +46,7 @@ var trace2 = {
 
   marker: {
 
-    size: [400, 600, 800, 1000],
+    size: (data.population/800000) * 100,
 
     //setting 'sizeref' to lower than 1 decreases the rendered size
 
@@ -70,9 +70,9 @@ var layout = {
 
   showlegend: false,
 
-  height: 600,
+  // height: 600,
 
-  width: 600
+  // width: 600
 
 };
 

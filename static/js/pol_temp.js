@@ -10,35 +10,45 @@ function buildPolTempChart(state, fromDate, toDate) {
              
              
              
-             var data2 = [{
+             var data2 = {
              
-                x: data.year,
+                x: data.Year,
              
                 y: data.co2,
              
-                type: 'bar'      }];
+                type: 'bar',  
+
+                name : 'Pollution'
+                   
+               };
              
              
              
-             var data1 = [{
+             var data1 = {
              
-                x: data.year,
+                x: data.Year,
              
                 y: data.avgTemp,
              
-                type: 'bar'      }];
+                type: 'bar',
+                
+                name : 'Temperature'
+               
+               };
              
+             var trace = [data2, data1]
              
-             
-             
-             
-             var layout2 = { margin: { t: 30, b: 100 } };
-             
-             var layout1 = { margin: { t: 30, b: 100 } };
-             
-             Plotly.plot('pol_temp', data1, layout1);
-             
-             Plotly.plot('pol_temp', data2, layout2);
+             var layout = {
+
+               xaxis: {
+       
+                   nticks: data.Year   
+       
+               }
+       
+             }
+
+             Plotly.newPlot('pol_temp', trace, layout);
              
              });
              
