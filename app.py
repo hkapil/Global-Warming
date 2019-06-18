@@ -124,47 +124,26 @@ def popTemp(state,fromDate, toDate):
     return jsonify(data1)
 
 
-@app.route("/metadata/<state>")
-def population_metadata(state):
+@app.route("/metadata//<state>/<fromDate>/<toDate>")
+def population_metadata(state, fromDate, toDate):
 #    """Return the MetaData for a given sample."""
-    sel = [
-        Population.ID,
-        Population.State,
-        Population.Year,
-        Population.Population,
-    ]
+    # sel = [
+    #     Population.ID,
+    #     Population.State,
+    #     Population.Year,
+    #     Population.Population,
+    # ]
 
-    results = db.session.query(*sel).filter(Population.State == state).all()
+    # results = db.session.query(*sel).filter(Population.State == state).all()
 
     # Create a dictionary entry for each row of metadata information
     population = {}
-    for result in results:
-        population["ID"] = result[0]
-        population["State"] = result[1]
-        population["Year"] = result[2]
-        population["Population"] = result[3]
+    # for result in results:
+    population["State"] = state
+    population["From Year"] = fromDate
+    population["Population"] = toDate
 
     return jsonify(population)
-
-
-@app.route("/samples/<sample>")
-def samples(sample):
-    """Return `otu_ids`, `otu_labels`,and `sample_values`."""
-    stmt = db.session.query(Population).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
-
-    # Filter the data based on the sample number and
-    # only keep rows with values above 1
-    sample_data = df.loc[df[sample] > 1, ["otu_id", "otu_label", sample]]
-    sample_data = sample_data.sort_values(sample, ascending=False)
-
-    # Format the data to send as json
-    data = {
-        "otu_ids": sample_data.otu_id.values.tolist(),
-        "sample_values": sample_data[sample].values.tolist(),
-        "otu_labels": sample_data.otu_label.tolist(),
-    }
-    return jsonify(data)
 
 
 if __name__ == "__main__":

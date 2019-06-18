@@ -31,19 +31,6 @@
       </div>
     </div>
     <div class="row">
-      <!-- <div class="col-md-4">
-          <div class="well">
-          <h5>SELECT From:</h5>
-          <select id="selDataset1" onchange="optionChanged(this.value)"></select>
-        </div>
-      </div> -->
-      <!-- <div class="col-md-4">
-          <div class="well">
-          <h5>SELECT To:</h5>
-          <select id="selDataset2" onchange="optionChanged(this.value)"></select>
-        </div>
-      </div> -->
-    <!-- </div> -->
     <div class="col-md-6">
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -52,15 +39,17 @@
           <div class="col-md-4">
               <div class="well">
                 <h5>State:</h5>
-                <select id="selDataset" onchange="optionChanged(this.value)"></select>
-                <h5>From Year:</h5>
-                <select id="selDataset1" onchange="optionChanged(this.value)"></select>
+                <select id="selDataset" placeholder="MD" onchange="optionChanged(this.value)"></select>
+                <h5>From Year:</h5> 
+                <select id="selDataset1" placeholder="1980" onchange="optionChanged(this.value)"></select>
                 <h5>To Year:</h5>
-                <select id="selDataset2" onchange="optionChanged(this.value)"></select>
+                <select id="selDataset2" placeholder="1990" onchange="optionChanged(this.value)"></select>
               </div>
             </div>
-                <div id="sample-metadata" class="panel-body"></div>
-        </div>
+            <div class="col-md-4">
+              <div id="sample-metadata" class="panel-body"></div>
+            </div>
+          </div>
       </div>
       <div class="col-md-6">
           <video id="vid1" class="video-js vjs-default-skin"    
@@ -74,30 +63,41 @@
       
     </div>
     <div class="row">
-          <!-- The div that holds our map -->
-    <div class="col-md-6">
-      <div id="divmap"></div>
-      </div>
       <div class="col-md-6">
-            <div id="three_factor"></div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Population vs Temperature vs Pollution</h3>
           </div>
-        </div>
+        <div id="three_factor"></div>
       </div>
-      <div class="row">
-    <div class="col-md-4">
-      <h4>Polution vs Temperature</h4>
-      <div id="pol_temp"></div>
     </div>
-    <div class="col-md-4">
-        <h4>Population vs Temperature</h4>
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Polution vs Temperature</h3>
+        </div>
+        <div id="pol_temp"></div>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Population vs Temperature</h3>
+          </div>
         <div id="pop_temp"></div>
+      </div>
     </div>
-    <div class="col-md-4">
-        <h4>Polution vs Population</h4>
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Polution vs Population</h3>
+          </div>
         <div id="pol_pop"></div>
+      </div> 
     </div> 
-  </div>
-</div>
+    </div>
 </div>
 <script src="../static/dist/Youtube.js"></script>  
 <!-- D3 -->
@@ -114,12 +114,10 @@
 <script type="text/javascript" src="../static/js/pol_temp.js"></script>
 <script type="text/javascript" src="../static/js/pop_temp.js"></script>
 <script type="text/javascript" src="../static/js/pol_pop.js"></script>
-<!-- <script type="text/javascript" src="../static/js/rate_change.js"></script> -->
   
   <!-- <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <!--script src="{{ url_for('static', filename='js/bonus.js') }}"></script>-->
   <script src="{{ url_for('static', filename='js/plot.js') }}"></script>
 
 </body>
