@@ -17,6 +17,9 @@ Industrialization Emissions: https://www.eia.gov/opendata/qb.php?category=225166
 # Solution Architecture
 ![Solution_Arch](Images/Solution_Arch.jpg)
 
-
-# Visualization
-![Visualization](Images/Visualization.jpg)
+# Pipeline to launch website
+1)    Clone the repository to your local computer using the <repository name on GitHub>
+2)    Open the terminal and go to the cloned directory and Activate Python data (conda activate PythonData)
+3)    Run the code by using Python app.py command in terminal
+4)    Use the URL and copy it to your internet browser
+5)    Go around the website to explore and see the Visualizations
