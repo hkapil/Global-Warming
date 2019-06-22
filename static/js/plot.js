@@ -63,7 +63,7 @@ function init() {
     // Use the first sample from the list to build the initial plots
     // const firstSample = sample.State[0];
     //const firstSample = sampleNames[0];
-    const firstState = "MD";
+    const firstState = "AK";
     const firstfromDate = "1980";
     const firsttoDate = "1990";
     // document.getElementById("selDataset").placeholder = firstState; 
