@@ -19,7 +19,8 @@ Industrialization Emissions: https://www.eia.gov/opendata/qb.php?category=225166
 
 # Pipeline to launch website
 1)    Clone the repository to your local computer using the <repository name on GitHub>
-2)    Open the terminal and go to the cloned directory and Activate Python data (conda activate PythonData)
-3)    Run the code by using Python app.py command in terminal
-4)    Use the URL and copy it to your internet browser
-5)    Go around the website to explore and see the Visualizations
+2)    Add your mapbox API key in static/js/config.js
+3)    Open the terminal and go to the cloned directory and Activate Python data (conda activate PythonData)
+4)    Run the code by using Python app.py command in terminal
+5)    Use the URL and copy it to your internet browser
+6)    Go around the website to explore and see the Visualizations
